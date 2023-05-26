@@ -11,8 +11,8 @@
 int _printf(const char *format, ...)
 {
 	va_list ap;
-	int len = 0, i, ast_count = 0;
-	char *print, form[] = "cs";
+	int len = 0, i, ast_count = 0, str_len;
+	char *print, form[] = "cs", *str;
 
 	va_start(ap, format);
 	/* counting characters in format to allocate memory */
@@ -29,17 +29,24 @@ int _printf(const char *format, ...)
 				if (form[k] == format[i + 1])
 				{
 					break;
-				} k++;
+				} 
+				k++;
 			}
 			/*allocates number of characters based on length of what is stored in conversion variable*/
 			switch (format[i + 1])
 			{
 			case 'c':
-					len++;
+				len++;
 			case 's':
-					/*needs to go to next argument and count number of characters and add to len*/
-			}
-		}
+				/*needs to go to next argument and count number of characters and add to len*/
+				str = va_arg(ap, char *);
+				while (str[str_len} != NULL)
+				{
+					str_len++;
+					len++;
+				}
+					   } /*check why brackets are not aligning properly - switch bracket*/
+					   } /*check why brackets are not aligning properly - if bracket*/
 		else
 		{
 			len++;
@@ -50,6 +57,8 @@ int _printf(const char *format, ...)
 	len++;
 	/*allocate memory*/
 	print = malloc(len * sizeof(char));
+	/*go through format and add all characters to string print*/
+
 	/*prints to stdout with num characters = len*/
 	write (1, print, len);
 	/*free memory after printing*/
