@@ -10,14 +10,16 @@
 int _printf(const char *format, ...)
 {
 	int len = 0, i;
+	char *print;
 	
 	while format[i] != NULL
 	{
 		len++;
 		i++;
+		print = print + format[i];
 		if format[i] = "%"
 		{
-			
+			if format[i + 1]
 	}
 	len++;
 	
