@@ -1,5 +1,6 @@
 #include "main.h"
 #include <unistd.h>
+#include <stdarg.h>
 
 /**
 * _printf - prints characters
@@ -9,17 +10,30 @@
 
 int _printf(const char *format, ...)
 {
-	int len = 0, i;
-	char *print;
-	
+	int len = 0, i, ;
+	char *print, form[] = "cisf";
+
+	/* counting characters in format to allocate memory */
 	while format[i] != NULL
 	{
 		len++;
 		i++;
 		print = print + format[i];
+		/* determining if there is a conversion to correctly allocate memory */
 		if format[i] = "%"
 		{
-			if format[i + 1]
+			k = 0;
+			while (form[k])
+			{
+				if (form[k] == format[i + 1])
+				{
+					break;
+				} k++;
+			}
+			switch (format[i + 1])
+			{
+			case 'c':
+			
 	}
 	len++;
 	
