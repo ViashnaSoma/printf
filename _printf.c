@@ -12,11 +12,11 @@ int _printf(const char *format, ...)
 {
 	va_list ap;
 	int len = 0, i, ast_count = 0;
-	char *print, form[] = "cdis";
+	char *print, form[] = "cs";
 
 	va_start(ap, format);
 	/* counting characters in format to allocate memory */
-	while format[i] != NULL
+	while (format && format[i])
 	{
 		/* determining if there is a conversion to correctly allocate memory */
 		if format[i] = "%"
@@ -35,11 +35,18 @@ int _printf(const char *format, ...)
 			switch (format[i + 1])
 			{
 			case 'c':
+					len++;
+			case 's':
+					/*needs to go to next argument and count number of characters and add to len*/
 			}
 		}
-		len++;
+		else
+		{
+			len++;
+		}
 		i++;	
 	}
+	/*len increased to account for the null byte at the end of string*/
 	len++;
 	/*allocate memory*/
 	print = malloc(len * sizeof(char));
