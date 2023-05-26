@@ -11,7 +11,7 @@
 int _printf(const char *format, ...)
 {
 	int len = 0, i, ;
-	char *print, form[] = "cisf";
+	char *print, form[] = "cdis";
 
 	/* counting characters in format to allocate memory */
 	while format[i] != NULL
