@@ -12,7 +12,7 @@
 int _printf(const char *format, ...)
 {
 	va_list ap;
-	int len = 0, i, ast_count = 0, str_len, k, s, print_count = 0;
+	int len = 0, i = 0, ast_count = 0, str_len, k, s, print_count = 0;
 	char *print, form[] = "cs", *str;
 	char ch;
 
@@ -21,7 +21,7 @@ int _printf(const char *format, ...)
 	while (format && format[i])
 	{
 		/* determining if there is a conversion to correctly allocate memory */
-		if (*format[i] == "%")
+		if (format[i] == "%")
 		{
 			/*ast_count used to keep count of number of conversions to correctly allocate to corresponding arguments*/
 			ast_count++;
