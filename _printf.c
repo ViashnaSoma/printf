@@ -78,7 +78,7 @@ int _printf(const char *format, ...)
 				switch (format[i + 1])
 				{
 				case 'c':
-					ch = va_arg(ap, char);
+					ch = va_arg(ap, *char);
 					print[print_count] = ch;	
 				case 's':
 					str = va_arg(ap, char *);
