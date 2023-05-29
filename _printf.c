@@ -85,7 +85,7 @@ int _printf(const char *format, ...)
 					for (s = 0; s < str_len; s++)
 					{
 						print[print_count] = ch;
-						print++
+						print++;
 					}
 				} /*switch bracket*/
 			} /*if bracket*/
