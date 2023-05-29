@@ -13,7 +13,7 @@ int _printf(const char *format, ...)
 {
 	va_list ap;
 	int len = 0, i = 0, ast_count = 0, str_len, k, s, print_count = 0;
-	char *print, form[] = "cs", *str, *ch;
+	char *print, form[] = "cs", *str, ch;
 
 	va_start(ap, format);
 	/* counting characters in format to allocate memory */
@@ -78,8 +78,8 @@ int _printf(const char *format, ...)
 				switch (format[i + 1])
 				{
 				case 'c':
-					ch = va_arg(ap, char *);
-					print[print_count] = ch[0];
+					ch = va_arg(ap, int);
+					print[print_count] = ch;
 					break;
 				case 's':
 					for (s = 0; s < str_len; s++)
