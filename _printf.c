@@ -21,7 +21,7 @@ int _printf(const char *format, ...)
 	while (format && format[i])
 	{
 		/* determining if there is a conversion to correctly allocate memory */
-		if (format[i] == "%")
+		if (*format[i] == "%")
 		{
 			/*ast_count used to keep count of number of conversions to correctly allocate to corresponding arguments*/
 			ast_count++;
