@@ -96,7 +96,7 @@ int _printf(const char *format, ...)
 		print_count++;
 	}
 	/*prints to stdout with num characters = len*/
-	write (1, print, len);
+	write (1, print, print_count);
 	/*free memory after printing*/
 	free(print);
 	va_end(ap);
