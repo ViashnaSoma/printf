@@ -25,7 +25,7 @@ int _printf(const char *format, ...)
 			/*ast_count used to keep count of number of conversions to correctly allocate to corresponding arguments*/
 			ast_count++;
 			k = 0;
-			while (form[k])
+			while (form[k] && (k < 2))
 			{
 				if (form[k] == format[i + 1])
 				{
@@ -66,7 +66,7 @@ int _printf(const char *format, ...)
 		if (format[i] == '%')
 			{
 				k = 0;
-				while (form[k])
+				while (form[k] && (k < 2))
 				{
 					if (form[k] == format[i + 1])
 					{
@@ -82,11 +82,10 @@ int _printf(const char *format, ...)
 					print[print_count] = ch[0];
 					break;
 				case 's':
-					str = va_arg(ap, char *);
 					for (s = 0; s < str_len; s++)
 					{
-						print[print_count] = ch[0];
-						print++;
+						print[print_count] = str[s];
+						print_count++;
 					}
 				} /*switch bracket*/
 			} /*if bracket*/
