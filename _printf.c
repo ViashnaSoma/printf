@@ -42,7 +42,7 @@ int _printf(const char *format, ...)
 			case 's':
 				/*needs to go to next argument and count number of characters and add to len*/
 				str = va_arg(ap, char *);
-				while (str[str_len] != NULL)
+				while (str)
 				{
 					str_len++;
 					len++;
@@ -63,7 +63,7 @@ int _printf(const char *format, ...)
 	/*go through format and add all characters to string print*/
 	while (format && format[i])
 	{
-		if (format[i] == "%")
+		if (format[i] == '%')
 			{
 				k = 0;
 				while (form[k])
