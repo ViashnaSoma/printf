@@ -1,6 +1,7 @@
 #include "main.h"
 #include <unistd.h>
 #include <stdarg.h>
+#include <stdlib.h>
 
 /**
 * _printf - prints characters
@@ -20,7 +21,7 @@ int _printf(const char *format, ...)
 	while (format && format[i])
 	{
 		/* determining if there is a conversion to correctly allocate memory */
-		if format[i] = "%"
+		if (format[i] == "%")
 		{
 			/*ast_count used to keep count of number of conversions to correctly allocate to corresponding arguments*/
 			ast_count++;
@@ -62,7 +63,7 @@ int _printf(const char *format, ...)
 	/*go through format and add all characters to string print*/
 	while (format && format[i])
 	{
-		if format[i] = "%"
+		if (format[i] == "%")
 			{
 				k = 0;
 				while (form[k])
