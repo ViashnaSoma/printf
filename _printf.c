@@ -39,7 +39,7 @@ int _printf(const char *format, ...)
 			{
 			case 'c':
 				len = len + 1;
-				[[fallthrough]];
+				break;
 			case 's':
 				/*needs to go to next argument and count number of characters and add to len*/
 				str = va_arg(ap, char *);
@@ -81,7 +81,7 @@ int _printf(const char *format, ...)
 				case 'c':
 					ch = va_arg(ap, *char);
 					print[print_count] = ch;
-					[[fallthrough]];
+					break;
 				case 's':
 					str = va_arg(ap, *char);
 					for (s = 0; s < str_len; s++)
