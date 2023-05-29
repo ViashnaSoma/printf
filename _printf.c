@@ -99,5 +99,6 @@ int _printf(const char *format, ...)
 	write (1, print, len);
 	/*free memory after printing*/
 	free(print);
-	va_end(ap);	
+	va_end(ap);
+	return (0);
 }
