@@ -1,8 +1,8 @@
 #include "main.h"
 #include <unistd.h>
 #include <stdarg.h>
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 /**
 * _printf - prints characters
@@ -14,7 +14,7 @@ int _printf(char *format, ...)
 {
 	va_list ap;
 	int len = 0, i = 0, ast_count = 0, k, str_len = 0;
-	int print_count = 0, str_count = 0;
+	int print_count = 0, str_count = 0, check = 0;
 	char form[] = "cs", *str, *print, cstore;
 
 	va_start(ap, format);
@@ -23,6 +23,7 @@ int _printf(char *format, ...)
 	{
 		if (format[i] == '%')
 		{
+			check = 0;
 			for (k = 0; k < 2; k++)
 			{
 				if (form[k] == format[i + 1])
@@ -33,6 +34,7 @@ int _printf(char *format, ...)
 						case 'c':
 							len++;
 							cstore = va_arg(ap, int);
+							check = 1;
 							break;
 						case 's':
 							str = va_arg(ap, char *);
@@ -40,16 +42,22 @@ int _printf(char *format, ...)
 							{
 								str_len++;
 							}
+							check = 1;
 							break;
 					}
 				}
 			}
 		}
-		else
+		if ((check == 0) && (format[i] == '%'))
+		{
+			len++;
+		}
+		else if (format[i] != '%')
 		{
 			len++;
 		}
 		i++;
+		check = 0;
 	}
 	len = len + str_len - (ast_count * 2);
 	print = malloc(len * sizeof(char));
@@ -58,6 +66,7 @@ int _printf(char *format, ...)
 	{
 		if (format[i] == '%')
 		{
+			check = 0;
 			for (k = 0; k < 2; k++)
 			{
 				if (form[k] == format[i + 1])
@@ -67,6 +76,8 @@ int _printf(char *format, ...)
 						case 'c':
 							i = i + 2;
 							print[print_count] = cstore;
+							print_count++;
+							check = 1;
 							break;
 						case 's':
 							i = i + 2;
@@ -75,19 +86,25 @@ int _printf(char *format, ...)
 								print[print_count] = str[str_count];
 								print_count++;
 							}
+							check = 1;
 							break;
 					}
 				}
 			}
 		}
-		else
+		if ((check == 0) && (format[i] == '%'))
 		{
 			print[print_count] = format[i];
 			i++;
+			print_count++;
 		}
-		print_count++;
+		if (format[i] != '%')
+		{
+			print[print_count] = format[i];
+			i++;
+			print_count++;
+		}
 	}
-	printf("Using printf: %s\n", print);
 	write(1, print, print_count);
 	free(print);
 	va_end(ap);
