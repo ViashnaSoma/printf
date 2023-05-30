@@ -10,7 +10,7 @@
 * Return: printed characters
 */
 
-int _printf(char *format, ...)
+int _printf(const char *format, ...)
 {
 	va_list ap;
 	int len = 0, i = 0, ast_count = 0, k, str_len = 0;
