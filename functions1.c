@@ -91,7 +91,7 @@ int flags, char flag_ch, int width, int precision, int size)
 int a = BUFF_SIZE - 2;
 unsigned long int number = va_arg(types, unsigned long int);
 unsigned long int init_num = number;
-void(width);
+UNUSED(width);
 number = convert_size_unsgnd(number, size);
 if (number == 0)
 buffer[a--] = '0';
