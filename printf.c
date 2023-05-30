@@ -1,8 +1,8 @@
 #include "main.h"
 #include <unistd.h>
 #include <stdarg.h>
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 /**
 * _printf - prints characters
@@ -51,7 +51,7 @@ int _printf(char *format, ...)
 		}
 		i++;
 	}
-	len = len + str_len - (ast_count * 2);
+	len = len + str_len - (ast_count * 2) + 1;
 	print = malloc(len * sizeof(char));
 	i = 0;
 	while (format && format[i] != 0 && print_count <= len)
@@ -87,7 +87,6 @@ int _printf(char *format, ...)
 		}
 		print_count++;
 	}
-	printf("Using printf: %s\n", print);
 	write(1, print, print_count);
 	free(print);
 	va_end(ap);
