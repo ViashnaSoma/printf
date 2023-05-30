@@ -57,10 +57,10 @@ int _printf(char *format, ...)
 			len++;
 		}
 		i++;
+		check = 0;
 	}
 	len = len + str_len - (ast_count * 2);
 	print = malloc(len * sizeof(char));
-	printf("Length: %d\n", len);
 	i = 0;
 	while (format && format[i] != 0 && print_count <= len)
 	{
