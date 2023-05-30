@@ -35,7 +35,7 @@ UNUSED(flags);
 UNUSED(width);
 UNUSED(precision);
 UNUSED(size);
-if str = "(null)";
+if (str == NULL)
 {
 str = "(null)";
 if (precision >= 6)
@@ -118,7 +118,7 @@ buffer[j--] = (number % 10) + '0';
 number /= 10;
 }
 j++;
-return (write_number(is_negative, i, buffer, flags, width, precision, size));
+return (write_number(is_negative, j, buffer, flags, width, precision, size));
 }
 /**
  * print_binary - function that prints unsigned number
@@ -150,7 +150,7 @@ for (c = 1; c < 32; c++)
 b /= 2;
 i[c] = (a / b) % 2;
 }
-for (c = 0; sum = 0, count = 0; c < 32; c++)
+for (c = 0, sum = 0, count = 0; c < 32; c++)
 {
 sum += i[c];
 if (sum || c == 31)
