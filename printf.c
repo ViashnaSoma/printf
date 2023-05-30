@@ -2,6 +2,7 @@
 #include <unistd.h>
 #include <stdarg.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 /**
 * _printf - prints characters
@@ -9,95 +10,83 @@
 * Return: printed characters
 */
 
-int _printf(const char *format, ...)
+int _printf(char *format, ...)
 {
 	va_list ap;
-	int len = 0, i = 0, ast_count = 0, str_len, k, s, print_count = 0;
-	char *print, form[] = "cs", *str, ch;
-
+	int len = 0, i = 0, ast_count = 0, k, str_len = 0, print_count = 0, str_count = 0;
+	char form[] = "cs", *str, *print, cstore;
 	va_start(ap, format);
-	/* counting characters in format to allocate memory */
-	while (format && format[i])
+
+	while (format && format[i] != 0)
 	{
-		/* determining if there is a conversion to correctly allocate memory */
 		if (format[i] == '%')
 		{
-			/*ast_count used to keep count of number of conversions to correctly allocate to corresponding arguments*/
-			ast_count++;
-			k = 0;
-			while (form[k] && (k < 2))
+			for (k = 0; k < 2; k++)
 			{
-				if (form[k] == format[i + 1])
+			if (form[k] == format[i + 1])
 				{
-					break;
-				} 
-				k++;
-			}
-			/*allocates number of characters based on length of what is stored in conversion variable*/
-			switch (format[i + 1])
-			{
-			case 'c':
-				len = len + 1;
-				break;
-			case 's':
-				/*needs to go to next argument and count number of characters and add to len*/
-				str = va_arg(ap, char *);
-				while (str)
-				{
-					str_len++;
-					len++;
+					ast_count++;
+					switch (format[i + 1])
+					{
+						case 'c':
+							len++;
+							cstore = va_arg(ap, int);
+							break;
+						case 's':
+							str = va_arg(ap, char *);
+							while (str[str_len])
+							{
+								str_len++;
+							}
+							break;
+					}
 				}
-			} /*switch bracket*/
-		} /*if bracket*/
+			}
+		}
 		else
 		{
 			len++;
 		}
-		i++;	
+		i++;
 	}
-	/*len increased to account for the null byte at the end of string*/
-	len++;
-	i = 0;
-	/*allocate memory*/
+	len = len + str_len - (ast_count * 2);
 	print = malloc(len * sizeof(char));
-	/*go through format and add all characters to string print*/
-	while (format && format[i])
+	i = 0;
+	while (format && format[i] != 0 && print_count <= len)
 	{
 		if (format[i] == '%')
+		{
+			for (k = 0; k < 2; k++)
 			{
-				k = 0;
-				while (form[k] && (k < 2))
+				if (form[k] == format[i + 1])
 				{
-					if (form[k] == format[i + 1])
+					switch (format[i + 1])
 					{
-						break;
-					} 
-					k++;
-				}
-				/*allocates characters based on conversion type*/
-				switch (format[i + 1])
-				{
-				case 'c':
-					ch = va_arg(ap, int);
-					print[print_count] = ch;
-					break;
-				case 's':
-					for (s = 0; s < str_len; s++)
-					{
-						print[print_count] = str[s];
-						print_count++;
+						case 'c':
+							i = i + 2;
+							print[print_count] = cstore;
+							break;
+						case 's':
+							i = i + 2;
+							for (str_count = 0; str_count < str_len; str_count++)
+							{
+								print[print_count] = str[str_count];
+								print_count++;
+							}
+							break;
 					}
-				} /*switch bracket*/
-			} /*if bracket*/
-			else
-			{
-				print[print_count] = format[i];
+				}
 			}
+		}
+		else
+		{
+			print[print_count] = format[i];
+			i++;
+		}
 		print_count++;
 	}
-	/*prints to stdout with num characters = len*/
-	write (1, print, print_count);
-	/*free memory after printing*/
+	printf("Using printf: %s\n", print);
+	write(1, print, print_count);
 	free(print);
 	va_end(ap);
 	return (0);
