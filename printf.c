@@ -25,7 +25,7 @@ int _printf(char *format, ...)
 		{
 			for (k = 0; k < 2; k++)
 			{
-			if (form[k] == format[i + 1])
+				if (form[k] == format[i + 1])
 				{
 					ast_count++;
 					switch (format[i + 1])
