@@ -105,6 +105,8 @@ int _printf(const char *format, ...)
 			print_count++;
 		}
 	}
+	printf("print_count: %d\n", print_count);
+	printf("length: %d\n", len);
 	write(1, print, print_count);
 	free(print);
 	va_end(ap);
