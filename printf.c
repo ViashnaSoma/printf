@@ -108,5 +108,5 @@ int _printf(const char *format, ...)
 	write(1, print, print_count);
 	free(print);
 	va_end(ap);
-	return (0);
+	return (print_count);
 }
